@@ -1,7 +1,7 @@
 import {sprintf, vsprintf} from './sprintf';
 
 export default {
-  name: 'sprintf',
+  name: 'dollar',
   type: 'postProcessor',
 
   process(value, key, options) {
@@ -24,7 +24,7 @@ export default {
     }
 
     return {
-      postProcess: 'sprintf',
+      postProcess: 'dollar',
       sprintf: values
     };
   }
