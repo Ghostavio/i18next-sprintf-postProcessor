@@ -8,7 +8,7 @@
     babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
       return typeof obj;
     } : function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
     babelHelpers;
 
@@ -19,7 +19,7 @@
         not_json: /[^j]/,
         text: /^[^\x25]+/,
         modulo: /^\x25{2}/,
-        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijosuxX])/,
+        placeholder: /^\x24(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?(\d)/,
         key: /^([a-z_][a-z_\d]*)/i,
         key_access: /^\.([a-z_][a-z_\d]*)/i,
         index_access: /^\[(\d+)\]/,
@@ -208,7 +208,7 @@
     }
 
     var index = {
-      name: 'sprintf',
+      name: 'dollar',
       type: 'postProcessor',
 
       process: function process(value, key, options) {
@@ -230,7 +230,7 @@
         }
 
         return {
-          postProcess: 'sprintf',
+          postProcess: 'dollar',
           sprintf: values
         };
       }
